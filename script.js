@@ -83,7 +83,7 @@ firstComment.addEventListener('click' , (e)=>{
         const firstInputText = element.parentElement.parentElement.children[1].value;
         const subCommentNeighbour = element.parentElement.parentElement.nextElementSibling;
         
-        console.log(firstInputName);
+        // console.log(firstInputName);
         if( !firstInputName || !firstInputText){
             return;
         }
