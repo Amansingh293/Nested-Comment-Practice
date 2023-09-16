@@ -128,7 +128,7 @@ firstComment.addEventListener('click' , (e)=>{
         if( editToggler === false){
             editEnabler[0].disabled = '';
             editEnabler[1].disabled = '';
-            element.textContent = 'Cancel';
+            element.textContent = 'Save';
             editToggler = true;
         }
         else{
