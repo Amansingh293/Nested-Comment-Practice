@@ -1,6 +1,10 @@
 const firstComment = document.querySelector('.main-container');
 
-firstComment.appendChild(createComment('' , ''));
+let firstCommentChecker = true;
+
+firstComment.appendChild(createComment('' , '' , true ));
+
+let editToggler = false;
 
 function createElement(elementType = 'div', properties , ...children){
     
@@ -18,19 +22,23 @@ function createElement(elementType = 'div', properties , ...children){
 
 }
 
-function createComment(nameInput , textinput){
+function createComment(nameInput , textinput , firstCommentChecker){
 
-    const name = createElement('input' , { className : 'name' , value: nameInput , placeholder: 'Your Name' , disabled: 'disabled' });
+    let name = createElement('input' , { className : 'name' , value: nameInput , placeholder: 'Your Name' , disabled: 'disabled' });
+    let textbody = createElement('textArea' , {className : 'textBody', placeholder: 'Comment' , cols: '30' , rows: '6' , value: textinput , disabled: 'disabled'});
+    let deleteBtn = createElement('button' , {className: 'delete' , textContent: 'Delete'});
+    let replyButton = createElement('button' , { className: 'reply' , textContent: 'Reply'});
+    let editBtn = createElement('button' , {className: 'edit' , textContent: 'Edit'});
+    let buttonHolder = createElement('div' , {className: 'commentButtonsHolder'} , replyButton ,editBtn, deleteBtn);
 
-    const textbody = createElement('textArea' , {className : 'textBody', placeholder: 'Comment' , cols: '30' , rows: '6' , value: textinput , disabled: 'disabled'});
-
-    const replyButton = createElement('button' , { className: 'reply' , textContent: 'Reply'});
-
-    const deleteBtn = createElement('button' , {className: 'delete' , textContent: 'Delete'});
-    
-    const editBtn = createElement('button' , {className: 'edit' , textContent: 'Edit'});
-
-    const buttonHolder = createElement('div' , {className: 'commentButtonsHolder'} , replyButton ,editBtn, deleteBtn);
+    if(firstCommentChecker){
+        name = createElement('input' , { className : 'name' , value: nameInput , placeholder: 'Your Name'});
+        textbody = createElement('textArea' , {className : 'textBody', placeholder: 'Comment' , cols: '30' , rows: '6' , value: textinput});
+        replyButton = createElement('button' , { className: 'reply' , textContent: 'Reply'});
+        // editBtn = createElement('button' , {className: 'edit' , textContent: 'Edit'});
+        buttonHolder = createElement('div' , {className: 'commentButtonsHolder'} , replyButton);
+        firstCommentChecker = false;
+    }
 
     const mainComment = createElement('div' , {className: 'mainComment'} , name , textbody , buttonHolder);
 
@@ -116,11 +124,23 @@ firstComment.addEventListener('click' , (e)=>{
 
     if( element.className === 'edit'){
         const editEnabler = element.parentElement.parentElement.children;
-        editEnabler[0].disabled = '';
-        editEnabler[1].disabled = '';
+
+        if( editToggler === false){
+            editEnabler[0].disabled = '';
+            editEnabler[1].disabled = '';
+            element.textContent = 'Cancel';
+            editToggler = true;
+        }
+        else{
+            editEnabler[0].disabled = 'disabled';
+            editEnabler[1].disabled = 'disabled';
+            element.textContent = 'Edit';
+            editToggler = false;
+        }
         check = false;
         return;
     }
-
 });
+
+
 
