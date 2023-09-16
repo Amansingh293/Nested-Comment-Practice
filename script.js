@@ -79,16 +79,20 @@ firstComment.addEventListener('click' , (e)=>{
     // console.log(createCommentInput());
 
     if( element.className === 'reply' && !check){
-
+        const firstInputName = element.parentElement.parentElement.children[0].value;
+        const firstInputText = element.parentElement.parentElement.children[1].value;
         const subCommentNeighbour = element.parentElement.parentElement.nextElementSibling;
-
-        if( editToggler === false){
+        
+        console.log(firstInputName);
+        if( !firstInputName || !firstInputText){
+            return;
+        }
+        if( editToggler === false ){
             subCommentNeighbour.appendChild(createCommentInput());
         }
         else{
             alert('First Save Your Comment');
         }
-        
 
         check = true;
     }
