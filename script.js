@@ -82,7 +82,13 @@ firstComment.addEventListener('click' , (e)=>{
 
         const subCommentNeighbour = element.parentElement.parentElement.nextElementSibling;
 
-        subCommentNeighbour.appendChild(createCommentInput());
+        if( editToggler === false){
+            subCommentNeighbour.appendChild(createCommentInput());
+        }
+        else{
+            alert('First Save Your Comment');
+        }
+        
 
         check = true;
     }
